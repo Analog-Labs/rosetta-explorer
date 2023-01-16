@@ -27,7 +27,7 @@ import { NetworkIdentifier, NetworkOptionsResponse, NetworkStatusResponse } from
 export default function NetworkPage(
     props: NetworkIdentifier & {
         networkStatus: NetworkStatusResponse;
-        networkOptions: NetworkOptionsResponse;
+        networkOptions?: NetworkOptionsResponse;
         blocks: BlockRowInformation[] | undefined;
         transactions: TransactionRowInformation[] | undefined;
     }
@@ -35,7 +35,7 @@ export default function NetworkPage(
     const blocks = props.blocks;
     const transactions = props.transactions;
     const networkStatus = props.networkStatus;
-    const networkOptions = props.networkOptions;
+    const networkOptions = props.networkOptions || null; // Unused variable... 
 
     if (!networkStatus) {
         return <Loading />;

@@ -45,9 +45,9 @@ const NetworkPageRoute = ({
         return <GenericErrorPage message={`Network status for ${network.toString()} ${blockchain.toString()} not found`} />;
     }
 
-    if (!networkOptions) {
-        return <GenericErrorPage message={`Network options for ${network.toString()} ${blockchain.toString()} not found`} />;
-    }
+    // if (!networkOptions) {
+    //     return <GenericErrorPage message={`Network options for ${network.toString()} ${blockchain.toString()} not found`} />;
+    // } 
 
     if (!blocks) {
         return <GenericErrorPage message={`Blocks for ${network.toString()} ${blockchain.toString()} cannot be resolved`} />;
