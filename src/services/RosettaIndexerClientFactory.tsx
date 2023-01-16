@@ -16,18 +16,13 @@
 import { RosettaRestClientFactory } from 'rosetta-client-typescript';
 
 export class RosettaIndexerClientFactory {
-
-
-    public static createFromIndexerCSV(indexersCSV:string):RosettaIndexerClientFactory {
-        const indexerClients: Record <string, RosettaRestClientFactory> = {};
-
+    public static createFromIndexerCSV(indexersCSV: string): RosettaIndexerClientFactory {
+        const indexerClients: Record<string, RosettaRestClientFactory> = {};
         indexersCSV.split(',').map((indexerProperties) => {
             const indexerPropertiesValues = indexerProperties.split('=');
             indexerClients[indexerPropertiesValues[0]] = new RosettaRestClientFactory({ url: indexerPropertiesValues[1] });
         });
         return new RosettaIndexerClientFactory(indexerClients);
-
-
     }
 
     constructor(private readonly clients: Record<string, RosettaRestClientFactory>) {}

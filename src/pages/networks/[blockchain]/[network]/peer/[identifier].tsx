@@ -57,7 +57,7 @@ export async function getServerSideProps(context: any) {
             network_identifier: networkIdentifier,
         })
         .catch(() => null);
-    const peer = networkStatusResponse?.peers.find((p) => p.peer_id == identifier) || null;
+    const peer = networkStatusResponse?.peers?.find((p) => p.peer_id == identifier) || null;
 
     return Utils.processDataForServerSideRendering({ props: { peer } });
 }
