@@ -23,7 +23,7 @@ const indexersCsv = process.env.NEXT_PUBLIC_INDEXERS;
 if (!networksCsv) {
     throw new Error('Env NEXT_PUBLIC_NETWORKS could not be resolved!');
 }
-if(!indexersCsv){
+if (!indexersCsv) {
     throw new Error('Env NEXT_PUBLIC_INDEXERS could not be resolved!');
 }
 export const rosettaClientFactory = RosettaClientFactory.createFromCSV(networksCsv);

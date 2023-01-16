@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { rosettaClientFactory, rosettaIndexerClientFactory } from '@components/basic/GlobalContext';
+import { rosettaIndexerClientFactory } from '@components/basic/GlobalContext';
 import { Utils } from '@services/Utils';
 import { useRouter } from 'next/router';
 import { FormEvent, useState } from 'react';

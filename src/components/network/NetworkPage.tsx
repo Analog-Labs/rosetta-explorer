@@ -35,7 +35,7 @@ export default function NetworkPage(
     const blocks = props.blocks;
     const transactions = props.transactions;
     const networkStatus = props.networkStatus;
-    const networkOptions = props.networkOptions || null; // Unused variable... 
+    const networkOptions = props.networkOptions || null; // Unused variable...
 
     if (!networkStatus) {
         return <Loading />;
@@ -102,25 +102,25 @@ export default function NetworkPage(
                     </div>
                 </Col>
             </Row>
-            {networkStatus.peers.length > 0 && (
+            {networkStatus?.peers && networkStatus.peers.length > 0 && (
                 <Row className="pt-3">
                     <Col className="bg-white border rounded pb-3 pt-3">
                         <h2>Peers</h2>
                         <Container className="p-0">
-                            {networkStatus.peers.map((peer) => {
-                                const identifier = peer.peer_id;
-
-                                return (
-                                    <Row key={identifier} className="border-bottom pt-2 pb-2">
-                                        <PeerIdentifierView
-                                            blockchain={props.blockchain}
-                                            network={props.network}
-                                            peerId={identifier}
-                                            name={(peer.metadata as any)?.name}
-                                        />
-                                    </Row>
-                                );
-                            })}
+                            {networkStatus?.peers &&
+                                networkStatus?.peers?.map((peer) => {
+                                    const identifier = peer.peer_id;
+                                    return (
+                                        <Row key={identifier} className="border-bottom pt-2 pb-2">
+                                            <PeerIdentifierView
+                                                blockchain={props.blockchain}
+                                                network={props.network}
+                                                peerId={identifier}
+                                                name={(peer.metadata as any)?.name}
+                                            />
+                                        </Row>
+                                    );
+                                })}
                         </Container>
                     </Col>
                 </Row>
