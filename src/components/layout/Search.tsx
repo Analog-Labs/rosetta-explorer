@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { rosettaClientFactory } from '@components/basic/GlobalContext';
+import { rosettaClientFactory, rosettaIndexerClientFactory } from '@components/basic/GlobalContext';
 import { Utils } from '@services/Utils';
 import { useRouter } from 'next/router';
 import { FormEvent, useState } from 'react';
@@ -24,7 +24,7 @@ export default function Search(props: NetworkIdentifier) {
     const [searchTerm, setSearchTerm] = useState('');
     const [searchError, setSearchError] = useState('');
     const router = useRouter();
-    const rosettaRestClientFactory = rosettaClientFactory.get(props.blockchain);
+    const rosettaRestClientFactory = rosettaIndexerClientFactory.get(props.blockchain);
     const onSubmit = async (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         const lowerCaseTerm = searchTerm.toLowerCase();

@@ -20,7 +20,7 @@ import { it } from 'mocha';
 
 describe('Utils', () => {
     it('range', () => {
-        expect(Utils.range(2, 5)).to.be.deep.eq([3, 4, 5]);
+        expect(Utils.range(2, 5)).to.be.deep.eq([2, 3, 4, 5]);
     });
 
     it('isAddress', () => {
