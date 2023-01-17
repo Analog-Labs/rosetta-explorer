@@ -28,31 +28,29 @@ export default function Search(props: NetworkIdentifier) {
     const onSubmit = async (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         const lowerCaseTerm = searchTerm.toLowerCase();
-        if (Utils.isTransactionHash(lowerCaseTerm)) {
-            try {
-                const transactions = await rosettaRestClientFactory.search().searchTransactions({
-                    network_identifier: props,
-                    transaction_identifier: {
-                        hash: lowerCaseTerm,
-                    },
-                });
-                const transaction = transactions.transactions.find((t) => t.transaction.transaction_identifier.hash === lowerCaseTerm);
-                if (transaction) {
-                    return router.push(
-                        `/networks/${props.blockchain}/${props.network}/block/${transaction.block_identifier.index}/transaction/${lowerCaseTerm}`
-                    );
+        try {
+            const transactions = await rosettaRestClientFactory.search().searchTransactions({
+                network_identifier: props,
+                transaction_identifier: {
+                    hash: lowerCaseTerm,
+                },
+            });
+            const transaction = transactions.transactions.find((t) => t.transaction.transaction_identifier.hash === lowerCaseTerm);
+            if (transaction) {
+                return router.push(
+                    `/networks/${props.blockchain}/${props.network}/block/${transaction.block_identifier.index}/transaction/${lowerCaseTerm}`
+                );
+            } else {
+                if (parseInt(lowerCaseTerm) && !lowerCaseTerm.match('[a-zA-Z]+')) {
+                    return router.push(`/networks/${props.blockchain}/${props.network}/block/${lowerCaseTerm}`);
+                } else {
+                    return router.push(`/networks/${props.blockchain}/${props.network}/account/${lowerCaseTerm}`);
                 }
-                setSearchError(`Transaction with hash ${lowerCaseTerm} not found!`);
-            } catch (e: unknown) {
-                setSearchError(`Cannot search transaction. Error: ${Utils.getMessage(e)}`);
             }
-        } else if (Utils.isAddress(lowerCaseTerm)) {
-            return router.push(`/networks/${props.blockchain}/${props.network}/account/${lowerCaseTerm}`);
-        } else if (parseInt(lowerCaseTerm)) {
-            return router.push(`/networks/${props.blockchain}/${props.network}/block/${lowerCaseTerm}`);
-        } else {
-            setSearchError('Entered value is not a block number, address or transaction hash!');
+        } catch (e: unknown) {
+            setSearchError(`Cannot search Error: ${Utils.getMessage(e)}`);
         }
+        setSearchError('Entered value is not a block number, address or transaction hash!');
     };
     return (
         <>
