@@ -16,11 +16,14 @@
 import { NetworkManager } from '@services/NetworkManager';
 import { RosettaClientFactory } from '@services/RosettaClientFactory';
 import { RosettaIndexerClientFactory } from '@services/RosettaIndexerClientFactory';
+import getConfig from 'next/config';
 import { createContext, ReactNode } from 'react';
 
-const networksCsv = process.env.NEXT_PUBLIC_NETWORKS;
-const indexersCsv = process.env.NEXT_PUBLIC_INDEXERS;
+const { publicRuntimeConfig } = getConfig();
+const networksCsv = publicRuntimeConfig.NETWORKS;
+const indexersCsv = publicRuntimeConfig.INDEXERS;
 if (!networksCsv) {
+    publicRuntimeConfig;
     throw new Error('Env NEXT_PUBLIC_NETWORKS could not be resolved!');
 }
 if (!indexersCsv) {
