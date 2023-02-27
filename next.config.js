@@ -4,6 +4,5 @@ module.exports = {
   output: 'standalone',
   publicRuntimeConfig: {
     NETWORKS: process.env.NEXT_PUBLIC_NETWORKS,
-    INDEXERS: process.env.NEXT_PUBLIC_INDEXERS
   },
 }
